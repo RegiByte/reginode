@@ -1,0 +1,22 @@
+{
+	"env": {
+		"es2020": false,
+		"node": true,
+		"es6": false,
+		"jest": true
+	},
+	"extends": [
+		"standard",
+		"prettier",
+		"plugin:prettier/recommended",
+		"plugin:sonarjs/recommended"
+	],
+	"parserOptions": {
+		"ecmaVersion": 11,
+		"sourceType": "module"
+	},
+	"rules": {
+		"no-unused-vars": "off",
+		"standard/no-callback-literal": "off"
+	}
+}

@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const package = require('../package.json')
+const program = require("commander");
+const packageConfig = require("../package.json");
 
-program.version(package.version)
+program.version(packageConfig.version);
 
 program
-        .command('add [todo]')
-        .description('Adds a todo')
-        .action(todo => {
-                console.log(todo)
-        })
+  .command("add [todo]")
+  .description("Adds a todo")
+  .action((todo) => {
+    console.log(todo);
+  });
 
-program.parse(process.argv)
+program.parse(process.argv);
