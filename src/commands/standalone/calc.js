@@ -1,4 +1,7 @@
 const chalk = require("chalk");
+const {
+  COMMAND_CALC_SHOW_ERROR_MESSAGE_MISSING_FORMULA,
+} = require("../../constants/messages");
 const { COMMAND_CALC_SHOW_ERROR_MESSAGE } = require("../../constants/messages");
 const {
   COMMAND_CALC_SHOW_RESULT_MESSAGE,
@@ -14,7 +17,14 @@ function commandCalc(program) {
   program
     .command(COMMAND_CALC_SYNTAX)
     .description(COMMAND_CALC_DESCRIPTION)
+    .option("-s", "--silent", "runs in silence")
     .action((formula) => {
+      if (!formula) {
+        return console.log(
+          chalk.red(format(COMMAND_CALC_SHOW_ERROR_MESSAGE_MISSING_FORMULA))
+        );
+      }
+
       console.log(
         chalk.blue(format(COMMAND_CALC_SHOW_FORMULA_MESSAGE, formula))
       );

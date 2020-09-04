@@ -1,12 +1,21 @@
 #!/usr/bin/env node
 
-const program = require("commander");
-const packageConfig = require("../package.json");
-const chalk = require("chalk");
-const setupCommands = require("./commands");
+const program = require("./program");
 
-program.version(packageConfig.version);
+let stdin = "";
 
-setupCommands(program);
+if (process.stdin.isTTY) {
+  program.parse(process.argv);
+} else {
+  process.stdin.on("readable", function () {
+    const chunk = this.read();
 
-program.parse(process.argv);
+    if (chunk !== null) {
+      stdin += chunk;
+    }
+  });
+
+  process.stdin.on("end", function () {
+    program.parse([...process.argv, stdin.trim()]);
+  });
+}
